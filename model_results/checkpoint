@@ -1,0 +1,2 @@
+model_checkpoint_path: "J2Net.ckpt"
+all_model_checkpoint_paths: "J2Net.ckpt"

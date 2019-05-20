@@ -1,15 +1,11 @@
 # **Traffic Sign Recognition** 
-
-## Writeup
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
+### Self driving cars use a lot of algorithms to detect the world. This project is one of the input that I consider that is super important in the street. Recognize traffic signs! Probably, this could be save your life ! :)
 ---
 
 **Build a Traffic Sign Recognition Project**
 
 The goals / steps of this project are the following:
-* Load the data set (see below for links to the project data set)
+* Load the data set
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
@@ -17,26 +13,99 @@ The goals / steps of this project are the following:
 * Summarize the results with a written report
 
 
-[//]: # (Image References)
+<img src="writeup_files/Confusion_matrix_without_normalization.png" alt="drawing" width="600"/>  
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+<img src="writeup_files/Normalized_confusion_matrix.png" alt="drawing" width="600"/> 
 
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+<img src="writeup_files/visualization_layer_1.png" alt="drawing" width="600"/>  
 
----
-### Writeup / README
+<img src="writeup_files/visualization_layer_2.png" alt="drawing" width="600"/>  
 
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
+My goal is provide a clear code for the community. Feel free to run the code, test it and create another functions that help to get better results.
 
 You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+
+### Dataset Exploration
+
+- *Dataset Summary* - 
+
+The pickled data is a dictionary with 4 key/value pairs:
+
+- - `'features'` is a 4D array containing raw pixel data of the traffic sign images, (num examples, width, height, channels).
+- - `'labels'` is a 1D array containing the label/class id of the traffic sign. The file `signnames.csv` contains id -> name mappings for each id.
+- -  `'sizes'` is a list containing tuples, (width, height) representing the original width and height the image.
+- -  `'coords'` is a list containing tuples, (x1, y1, x2, y2) representing coordinates of a bounding box around the sign in the image.
+
+
+- *Exploratory Visualization*
+
+    Find below the distribution of the data set according to each class. In that chart, we can see that all classes are not equal in number of samples, that means, the neural network could train using over fitting, because there is not enough data to train the model.
+
+    <img src="writeup_files/dataset_description_original_data.png" alt="drawing" width="600"/>   
+
+    Number of training examples = 34799
+
+    Number of validation examples = 4410
+
+    Number of testing examples = 12630
+
+    Image data shape = (32, 32, 3)
+
+    Number of classes = 43
+
+    Total number of samples in dataset = 51839
+
+---
+On the other hand, you can see aleatory images of the data set, this is just for understand how the images looks like and what is exactly the challenge to solve.
+
+<img src="writeup_files/dataset_random_visualization.png" alt="drawing" width="600"/>  
+
+### Design and Test a Model Architecture
+
+Find below the design and the implementation of a deep learning model that learns to ecognize traffic signs. Trained and tested with the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset)
+
+A solid starting point is use the LeNet-5 implementation shown in the classroom. Basically, I changed the number of class and some layers, but eventually is the same architecture. 
+
+There are various aspects to consider when thinking about this problem:
+
+- - Neural network architecture (is the network over or underfitting?)
+- - Play around preprocessing techniques (normalization, rgb to grayscale, etc)
+- - Number of examples per label (some have more than others).
+- - Generate fake data.
+
+- *Preprocessing*
+
+    Minimally, the image data should be normalized so that the data has mean zero and equal variance. For image data, `(pixel - 128)/ 128` is a quick way to approximately normalize the data and can be used in this project.
+
+- *Model Architecture*
+
+    <img src="writeup_files/Model_Architecture.png" alt="drawing" width="350"/>  
+    
+    A validation set can be used to assess how well the model is performing. A low accuracy on the training and validation sets imply underfitting. A high accuracy on the training set but low accuracy on the validation set implies overfitting.
+
+    <img src="writeup_files/model_training_history.png" alt="drawing" width="500"/>  
+
+### Test a Model on New Images
+
+- *Acquiring New Images* - The submission includes five new German Traffic signs found on the web, and the images are visualized. Discussion is made as to particular qualities of the images or traffic signs in the images that are of interest, such as whether they would be difficult for the model to classify.
+
+- *Performance on New Images* - The submission documents the performance of the model when tested on the captured images. The performance on the new images is compared to the accuracy results of the test set.
+
+- *Model Certainty* - Softmax Probabilities - The top five softmax probabilities of the predictions on the captured images are outputted. The submission discusses how certain or uncertain the model is of its predictions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Data Set Summary & Exploration
 
